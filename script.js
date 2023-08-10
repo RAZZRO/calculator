@@ -18,100 +18,67 @@ function operating() {
     if (!firstInput) {
         firstInput = Inputtext.value;
         Inputtext.value = `${firstInput}${operatorInput[0]}`
-        // console.log(Input);
-        // Inputtext.value = "";
     } else {
         secondInput = Inputtext.value.split(operatorInput[0]).pop();
-        console.log(secondInput +"    seconinput");
-        // console.log(operator.textContent);
+        console.log(secondInput + "    seconinput");
         switch (operatorInput[0]) {
             case "+":
                 firstInput = Number(firstInput) + Number(secondInput);
                 Inputtext.value = `${firstInput}${operatorInput[1]}`;
                 operatorInput[0] = operatorInput[1]
-                operatorInput[1] = null;
-
-                // console.log(Input);
+                delete operatorInput[1];
                 break;
             case "-":
                 firstInput = Number(firstInput) - Number(secondInput);
                 Inputtext.value = `${firstInput}${operatorInput[1]}`;
                 operatorInput[0] = operatorInput[1]
-                operatorInput[1] = null;
-                // console.log(`operatorInput[0] ${operatorInput[0]}`);
-                // console.log(`operatorInput[1] ${operatorInput[1]}`);
-
-
-
-                // console.log(Input);
+                delete operatorInput[1];
                 break;
             case "*":
                 firstInput = Number(firstInput) * Number(secondInput);
                 Inputtext.value = `${firstInput}${operatorInput[1]}`;
                 operatorInput[0] = operatorInput[1]
-                operatorInput[1] = null;
-
-                // console.log(firstInput);
+                delete operatorInput[1];
                 break;
             case "/":
                 firstInput = Number(firstInput) / Number(secondInput);
                 Inputtext.value = `${firstInput}${operatorInput[1]}`;
                 operatorInput[0] = operatorInput[1]
-                operatorInput[1] = null;
-
-                // console.log(firstInput);
+                delete operatorInput[1];
                 break;
 
             default:
                 break;
         }
-        // if(operator.textContent == '+'){
 
-        // }
     }
 }
 
 function sum() {
 
     secondInput = Inputtext.value.split(operatorInput[0]).pop();
-    console.log(secondInput);
 
-
-    // console.log(operatorInput);
-    // console.log(firstInput);
     if (firstInput) {
         switch (operatorInput[0]) {
             case "+":
                 Inputtext.value = Number(firstInput) + Number(secondInput);
-                firstInput = Inputtext.value;
-                operatorInput[0] = null;
-                // console.log(`operatorInput[0] ${operatorInput[0]}`);
-                // console.log(`operatorInput[1] ${operatorInput[1]}`);
-
-
-
-                // console.log(firstInput);
-                break;
+                firstInput = "";
+                delete operatorInput[0];
+                 break;
             case "-":
                 Inputtext.value = Number(firstInput) - Number(secondInput);
-                firstInput = Inputtext.value;
-                operatorInput[0] = null;
-
-                // console.log(Input);
+                firstInput = "";
+                delete operatorInput[0];
                 break;
             case "*":
                 Inputtext.value = Number(firstInput) * Number(secondInput);
-                firstInput = Inputtext.value;
-                operatorInput[0] = null;
-
-                // console.log(Input);
+                firstInput = "";
+                delete operatorInput[0];
                 break;
             case "/":
                 Inputtext.value = Number(firstInput) / Number(secondInput);
-                firstInput = Inputtext.value;
-                operatorInput[0] = null;
-
-                // console.log(Input);
+                firstInput = "";
+                delete operatorInput[0];
                 break;
 
             default:
@@ -135,7 +102,7 @@ for (let index = 0; index < 10; index++) {
 }
 clear.addEventListener('click', () => {
     Inputtext.value = "";
-    firstInput = null;
+    firstInput = "";
 })
 
 for (let index = 0; index <= 3; index++) {
@@ -143,13 +110,10 @@ for (let index = 0; index <= 3; index++) {
     operator[index].addEventListener('click', () => {
         if (!operatorInput[0]) {
             operatorInput[0] = operator[index].textContent;
-            // console.log(`operatorInput[0] ${operatorInput[0]}`);
         } else {
             operatorInput[1] = operator[index].textContent
-            // console.log(`operatorInput[1] ${operatorInput[1]}`);
 
         }
-        // console.log(operatorInput);
         operating();
     });
 
@@ -157,6 +121,8 @@ for (let index = 0; index <= 3; index++) {
 }
 
 equal.addEventListener('click', sum);
+
+
 
 
 
