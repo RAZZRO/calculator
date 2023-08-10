@@ -3,6 +3,8 @@ const Inputtext = document.querySelector(".input");
 const clear = document.querySelector(".clear-button");
 const operator = document.querySelectorAll(".operator");
 const equal = document.querySelector(".equal");
+const dot = document.querySelector(".dot");
+
 
 var firstInput;
 var operatorInput = [];
@@ -17,10 +19,16 @@ function addnumber(index) {
 function operating() {
     if (!firstInput) {
         firstInput = Inputtext.value;
+        if (firstInput.substr(firstInput.length - 1) == ".") {
+            firstInput = `${firstInput}0`
+        }
         Inputtext.value = `${firstInput}${operatorInput[0]}`
     } else {
         secondInput = Inputtext.value.split(operatorInput[0]).pop();
         console.log(secondInput + "    seconinput");
+        if (secondInput.substr(secondInput.length - 1) == ".") {
+            secondInput = `${secondInput}0`
+        }
         switch (operatorInput[0]) {
             case "+":
                 firstInput = Number(firstInput) + Number(secondInput);
@@ -56,15 +64,19 @@ function operating() {
 
 function sum() {
 
-    secondInput = Inputtext.value.split(operatorInput[0]).pop();
+
 
     if (firstInput) {
+        secondInput = Inputtext.value.split(operatorInput[0]).pop();
+        if (secondInput.substr(secondInput.length - 1) == ".") {
+            secondInput = `${secondInput}0`
+        }
         switch (operatorInput[0]) {
             case "+":
                 Inputtext.value = Number(firstInput) + Number(secondInput);
                 firstInput = "";
                 delete operatorInput[0];
-                 break;
+                break;
             case "-":
                 Inputtext.value = Number(firstInput) - Number(secondInput);
                 firstInput = "";
@@ -121,6 +133,20 @@ for (let index = 0; index <= 3; index++) {
 }
 
 equal.addEventListener('click', sum);
+
+dot.addEventListener('click', () => {
+
+    var temp = Inputtext.value;
+    Inputtext.value = `${temp}.`;
+
+});
+
+document.addEventListener("keypress", (event) => {
+    if (event.keyCode == 13){
+      sum();
+    }
+  });
+
 
 
 
